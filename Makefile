@@ -1,5 +1,5 @@
 # Define the binary name
-BINARY_NAME=myapp
+BINARY_NAME=app
 VERSION=1.0.0
 
 # Build flags
