@@ -11,3 +11,8 @@ func TestGetPreviousDay(t *testing.T) {
 	bye, _ := json.Marshal(getDefaultDailyHouse())
 	t.Logf("%s", bye)
 }
+
+func TestGetPreviousMonth(t *testing.T) {
+	out := getPreviousMonth(-2)
+	t.Logf("previous:%s\n", out)
+}
