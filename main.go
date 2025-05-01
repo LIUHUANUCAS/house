@@ -22,6 +22,9 @@ func main() {
 			"status": "ok",
 		})
 	})
+	router.GET("/health1", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{"msg": "success"})
+	})
 	v1 := router.Group("/v1")
 	{
 		// Define routes
@@ -41,7 +44,7 @@ func dailyHouse(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(http.StatusNotFound, "{}")
+	c.JSON(http.StatusNotFound, gin.H{"msg": "data not found"})
 }
 
 func AddDailyHouse(c *gin.Context) {
