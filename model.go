@@ -34,6 +34,8 @@ type DailyData struct {
 	TotalArea  float64 `json:"total_area"`
 	HouseCount float64 `json:"house_count"`
 	HouseArea  float64 `json:"house_area"`
+	HousePrice float64 `json:"house_price"`
+	TotalPrice float64 `json:"total_price"`
 }
 
 func getDefaultDailyHouse() DailyHouse {

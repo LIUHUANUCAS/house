@@ -1,3 +1,13 @@
 curl -X POST http://localhost:8080/v1/add_daily_house \
   -H "Content-Type: application/json" \
   -d '{"day":"2025-04-10","daily_data":{"total_count":744,"total_area":64840,"house_count":619,"house_area":58754.18}}'
+
+
+curl -X POST http://localhost:8080/v1/add_daily_house \
+  -H "Content-Type: application/json" \
+  -d '{"day":"2025-04-10","daily_data":{"total_count":744,"total_area":64840,"house_count":619,"house_area":58754.18}}'
+
+filename="2025-05-06-00_old_daily.json"
+curl -X POST http://localhost:8080/v2/sh/add_old_daily_house \
+  -H "Content-Type: application/json" \
+  -d "$(cat "$filename")"

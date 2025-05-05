@@ -10,8 +10,13 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// db to store data
 var m sync.Map
+var sh sync.Map
+
+// date to serve data
 var hours []int = []int{-24, -48}
+var shHours []int = []int{0, -24}
 var month []int = []int{0, -1, -2}
 
 func main() {
@@ -28,6 +33,8 @@ func main() {
 	router.GET("/health", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"msg": "success"})
 	})
+
+	//Beijing data API
 	v1 := router.Group("/v1")
 	{
 		// Define routes
@@ -35,6 +42,15 @@ func main() {
 		v1.GET("/month_house", monthHouse)
 		v1.POST("/add_daily_house", addDailyHouse)
 		v1.POST("/force_house", forceAddHouse)
+	}
+	// shanghai data API
+	v2 := router.Group("/v2/sh")
+	{
+		// Define routes
+		v2.GET("/new_daily_house", shNewDailyHouse)
+		v2.GET("/old_daily_house", shOldDailyHouse)
+		v2.POST("/add_new_daily_house", addShNewDailyHouse)
+		v2.POST("/add_old_daily_house", addShOldDailyHouse)
 	}
 
 	// Run the server
