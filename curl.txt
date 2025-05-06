@@ -1,3 +1,9 @@
+curl -X GET http://localhost:8080/v1/daily_house | jq 
+curl -X GET http://localhost:8080/v2/sh/new_daily_house | jq 
+curl -X GET http://localhost:8080/v2/sh/old_daily_house | jq 
+curl -X GET http://localhost:8080/v3/fortune/daily | jq 
+
+
 curl -X POST http://localhost:8080/v1/add_daily_house \
   -H "Content-Type: application/json" \
   -d '{"day":"2025-04-10","daily_data":{"total_count":744,"total_area":64840,"house_count":619,"house_area":58754.18}}'
