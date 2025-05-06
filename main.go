@@ -13,6 +13,7 @@ import (
 // db to store data
 var m sync.Map
 var sh sync.Map
+var fortune sync.Map
 
 // date to serve data
 var hours []int = []int{-24, -48}
@@ -51,6 +52,13 @@ func main() {
 		v2.GET("/old_daily_house", shOldDailyHouse)
 		v2.POST("/add_new_daily_house", addShNewDailyHouse)
 		v2.POST("/add_old_daily_house", addShOldDailyHouse)
+	}
+
+	v3 := router.Group("/v3/fortune")
+	{
+		// Define routes
+		v3.GET("/daily", dailyFortune)
+		v3.POST("/add_daily", addDailyFortune)
 	}
 
 	// Run the server

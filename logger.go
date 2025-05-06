@@ -42,7 +42,7 @@ func setupLogger() zerolog.Logger {
 		Logger()
 
 	// 设置全局日志级别
-	zerolog.SetGlobalLevel(zerolog.InfoLevel)
+	zerolog.SetGlobalLevel(zerolog.DebugLevel)
 
 	return logger
 }

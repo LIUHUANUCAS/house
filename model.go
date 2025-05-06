@@ -49,3 +49,20 @@ func getDefaultDailyHouse() DailyHouse {
 		},
 	}
 }
+
+//	{
+//	    "name": "《长干行・其二》",
+//	    "author": "作者：崔颢",
+//	    "content": [
+//	        "家临九江水，来去九江侧。",
+//	        "同是长干人，生小不相识。"
+//	    ]
+//	}
+
+// Poem model
+type Poem struct {
+	Day     string   `json:"day"`
+	Name    string   `json:"name"`
+	Author  string   `json:"author"`
+	Content []string `json:"content"`
+}

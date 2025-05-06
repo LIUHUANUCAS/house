@@ -10,9 +10,8 @@ import (
 )
 
 func shNewDailyHouse(c *gin.Context) {
-	for _, h := range shHours {
-		currentDay := getPreviousDay(-h)
-		fmt.Println("current day", currentDay)
+	for _, h := range month {
+		currentDay := getPreviousHour(h)
 		if v, ok := sh.Load(currentDay); ok {
 			c.JSON(http.StatusOK, v)
 			return
@@ -45,7 +44,6 @@ func addShNewDailyHouse(c *gin.Context) {
 	}
 	fmt.Println("req", req)
 	log.Logger.Debug().Any("sh-data", req).Msg("add data")
-	// "todaySign_area":14360.1,"todaySign_ts":203
 	if _, ok := sh.Load(req.Day); !ok {
 		sh.Store(req.Day, DailyHouseResp{
 			Day: req.Day,
