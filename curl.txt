@@ -19,6 +19,6 @@ curl -X POST http://localhost:8080/v2/sh/add_old_daily_house \
   -d "$(cat "$filename")"
 
 filename="2025-05-06-fortune_daily.json"
-curl -X POST localhost:8080/v3/fortune/add_daily \
+curl -X POST 'localhost:8080/v3/fortune/add_daily?force=fortune' \
   -H "Content-Type: application/json" \
   -d "$(cat "$filename")"

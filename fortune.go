@@ -36,6 +36,9 @@ func addDailyFortune(c *gin.Context) {
 	if _, ok := db.Load(req.Day); !ok {
 		db.Store(req.Day, req)
 	}
+	if v, ok := c.GetQuery("force"); ok && v == "fortune" {
+		db.Store(req.Day, req)
+	}
 	log.Logger.Debug().Str("day", req.Day).Msg("Data added successfully")
 	c.JSON(http.StatusOK, req)
 }
