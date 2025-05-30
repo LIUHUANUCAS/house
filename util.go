@@ -15,6 +15,16 @@ func getPreviousDay(hours int) string {
 	return yesterday.Format("2006-01-02")
 }
 
+// func getStartEndTimestamp(hours int) (int64, int64) {
+
+// 	now := time.Now()
+
+// 	// Subtract {hours} hours to get previous day
+// 	previousDay := now.Add(time.Duration(hours) * time.Hour)
+
+// 	return previousDay.Unix(), now.Unix()
+// }
+
 func getPreviousMonth(month int) string {
 
 	now := time.Now()
@@ -46,4 +56,12 @@ func getPreviousHour(hours int) string {
 
 	// fmt.Println("Yesterday was:", yesterday.Format("2006-1-02"))
 	return yesterday.Format("2006-01-02-15")
+}
+
+func parseDay(day string) (time.Time, error) {
+	format := "2006-01-02"
+	if len(day) == 13 { // if it includes hour}
+		format = "2006-01-02-15"
+	}
+	return time.Parse(format, day)
 }

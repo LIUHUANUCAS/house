@@ -1,6 +1,23 @@
+
+
+
+
+
+beijing: 
+
+
+
 curl -X GET http://localhost:8080/v1/daily_house | jq 
+
+curl -X GET http://localhost:8080/v1/house_period/7 | jq 
+
+
+
+
 curl -X GET http://localhost:8080/v2/sh/new_daily_house | jq 
+
 curl -X GET http://localhost:8080/v2/sh/old_daily_house | jq 
+
 curl -X GET http://localhost:8080/v3/fortune/daily | jq 
 
 
@@ -22,3 +39,7 @@ filename="2025-05-06-fortune_daily.json"
 curl -X POST 'localhost:8080/v3/fortune/add_daily?force=fortune' \
   -H "Content-Type: application/json" \
   -d "$(cat "$filename")"
+
+curl -X POST http://localhost:8080/v1/add_daily_house \
+-H "Content-Type: application/json" \
+-d "$(cate "$filename")"

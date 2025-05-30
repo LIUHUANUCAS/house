@@ -10,6 +10,7 @@ LDFLAGS=-ldflags "-X main.version=$(VERSION) -X main.buildTime=`date +%Y-%m-%d_%
 all: build
 
 build:
+	go mod tidy
 	go build $(LDFLAGS) -o $(BINARY_NAME) .
 
 clean:
