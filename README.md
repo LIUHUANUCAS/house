@@ -6,11 +6,14 @@ protocol: json
 
 Data model:
 
-```json
+```go
 {
     total_count int
-    total_area: float
-    house_count: int
-    house_area: float
+    total_area float
+    house_count int
+    house_area float
 }
+
+new house: day="2025-06-09-08"
+
 ```

@@ -43,8 +43,10 @@ func main() {
 	{
 		// Define routes
 		v1.GET("/daily_house", dailyHouse)
+		v1.GET("/daily_new_house", beijingNewDailyHouse)
 		v1.GET("/month_house", monthHouse)
 		v1.POST("/add_daily_house", addDailyHouse)
+		v1.POST("/add_beijing_new_house", addBeijingHouse)
 		v1.POST("/force_house", forceAddHouse)
 
 		// Time-based retrieval endpoints
@@ -190,6 +192,45 @@ func addDailyHouse(c *gin.Context) {
 
 	log.Logger.Debug().Str("day", req.Day).Msg("Data added successfully")
 	c.JSON(http.StatusOK, req)
+}
+
+// AddBeijingHouse adds Beijing house data
+func addBeijingHouse(c *gin.Context) {
+	var req DailyHouseResp
+	// Bind JSON body to struct
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		log.Logger.Error().Err(err).Msg("Failed to bind JSON")
+		return
+	}
+
+	// Create daily house response
+	dailyResp := req
+
+	var dailyInMem bool
+
+	m := GetInMemDataAccessor(beijing)
+	// Store in Redis
+	if err := StoreHouseData(ctx, req.Day, dailyResp, beijingKey); err != nil {
+		log.Logger.Error().Err(err).Str("day", req.Day).Msg("Failed to store house data in Redis")
+		dailyInMem = true
+	}
+
+	// Also store in memory for backward compatibility
+	if dailyInMem {
+		if _, ok := m.Load(req.Day); !ok {
+			m.Store(req.Day, dailyResp)
+		}
+	}
+
+	// Create response with both daily and derived monthly data
+	response := map[string]interface{}{
+		"day":        req.Day,
+		"daily_data": req.DailyData,
+	}
+
+	log.Logger.Debug().Str("day", req.Day).Msg("Beijing house data added successfully")
+	c.JSON(http.StatusOK, response)
 }
 
 // ForceAddHouse force add daily house data
