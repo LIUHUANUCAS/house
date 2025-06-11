@@ -15,16 +15,6 @@ func getPreviousDay(hours int) string {
 	return yesterday.Format("2006-01-02")
 }
 
-// func getStartEndTimestamp(hours int) (int64, int64) {
-
-// 	now := time.Now()
-
-// 	// Subtract {hours} hours to get previous day
-// 	previousDay := now.Add(time.Duration(hours) * time.Hour)
-
-// 	return previousDay.Unix(), now.Unix()
-// }
-
 func getPreviousMonth(month int) string {
 
 	now := time.Now()
@@ -64,4 +54,8 @@ func parseDay(day string) (time.Time, error) {
 		format = "2006-01-02-15"
 	}
 	return time.Parse(format, day)
+}
+
+func getBeijingNewHouseDayKey(day string) string {
+	return day + "-00"
 }
