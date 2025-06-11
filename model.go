@@ -8,6 +8,12 @@ type DailyHouse struct {
 	DailyData DailyData `json:"daily_data"`
 }
 
+// // BeijingHouseRequest request model for Beijing house data without month-related fields
+// type BeijingHouseRequest struct {
+// 	Day       string    `json:"day"`
+// 	DailyData DailyData `json:"daily_data"`
+// }
+
 // DailyHouseResp  daily house resp data
 type DailyHouseResp struct {
 	Day       string    `json:"day"`

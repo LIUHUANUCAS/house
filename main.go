@@ -43,8 +43,10 @@ func main() {
 	{
 		// Define routes
 		v1.GET("/daily_house", dailyHouse)
+		v1.GET("/daily_new_house", beijingNewDailyHouse)
 		v1.GET("/month_house", monthHouse)
 		v1.POST("/add_daily_house", addDailyHouse)
+		v1.POST("/add_beijing_new_house", addBeijingNewHouse)
 		v1.POST("/force_house", forceAddHouse)
 
 		// Time-based retrieval endpoints
